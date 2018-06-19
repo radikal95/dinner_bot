@@ -41,10 +41,10 @@ def update_stage(message, stage):
 @bot.message_handler(commands=['start'])
 def insert_into_a_db(message):
     print('a')
-    # query = """SELECT auth
-	 #        FROM public."user"
-    #         WHERE id={};"""
-    # query_result=db_query.execute_query(query.format(message.chat.id))
+    query = """SELECT auth
+	        FROM public."user"
+            WHERE id={};"""
+    query_result=db_query.execute_query(query.format(message.chat.id))
     # if len(query_result.value)<1:
     #     query ="""INSERT INTO public."user"
     #     (id, full_name_telegram,stage,auth)
