@@ -47,26 +47,26 @@ def insert_into_a_db(message):
     print('b')
 
     query_result=db_query.execute_query(query.format(message.chat.id))
-    # if len(query_result.value)<1:
-    #     query ="""INSERT INTO public."user"
-    #     (id, full_name_telegram,stage,auth)
-    #     VALUES ({},'{}',{}, False);"""
-    #     name = 'Unknown user'
-    #     if message.chat.first_name:
-    #         name = str(message.chat.first_name)
-    #     if message.chat.last_name:
-    #         name = name + ' ' + str(message.chat.last_name)
-    #     query_result=db_query.execute_query(query.format(message.chat.id,name,0),is_dml=True)
-    #     if (query_result.success):
-    #         bot.send_message(message.chat.id, "So, tell us the key")
-    # else:
-    #     if not query_result.value[0][0]:
-    #         bot.send_message(message.chat.id, "Tell us the key")
-    #     # else:
-    #     #     markup = telebot.types.ReplyKeyboardMarkup()
-    #     #     markup.row('Group A')
-    #     #     markup.row('Group B')
-    #     #     bot.send_message(message.chat.id, "Сhoose your group!", reply_markup=markup)
+    if len(query_result.value)<1:
+        query ="""INSERT INTO public."user"
+        (id, full_name_telegram,stage,auth)
+        VALUES ({},'{}',{}, False);"""
+        name = 'Unknown user'
+        if message.chat.first_name:
+            name = str(message.chat.first_name)
+        if message.chat.last_name:
+            name = name + ' ' + str(message.chat.last_name)
+        query_result=db_query.execute_query(query.format(message.chat.id,name,0),is_dml=True)
+        if (query_result.success):
+            bot.send_message(message.chat.id, "So, tell us the key")
+    else:
+        if not query_result.value[0][0]:
+            bot.send_message(message.chat.id, "Tell us the key")
+        # else:
+        #     markup = telebot.types.ReplyKeyboardMarkup()
+        #     markup.row('Group A')
+        #     markup.row('Group B')
+        #     bot.send_message(message.chat.id, "Сhoose your group!", reply_markup=markup)
 
 
 @bot.message_handler(regexp=config.secret_key)
