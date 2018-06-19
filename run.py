@@ -44,7 +44,8 @@ def insert_into_a_db(message):
     query = """SELECT auth
 	        FROM public."user"
             WHERE id={};"""
-    bot.send_message(message.chat.id, "Сhoose your group!")
+    print('b')
+
     query_result=db_query.execute_query(query.format(message.chat.id))
     # if len(query_result.value)<1:
     #     query ="""INSERT INTO public."user"
@@ -117,7 +118,8 @@ def default_answer(message):
     bot.send_message(message.chat.id, "You are not authorized")
 
 while True:
-    try:
-        bot.polling(none_stop=True)
-    except:
-        continue
+    bot.polling(none_stop=True)
+    # try:
+    #     bot.polling(none_stop=True)
+    # except:
+    #     continue
