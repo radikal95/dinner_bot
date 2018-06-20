@@ -149,6 +149,11 @@ def callback_inline(call):
                                       WHERE id={};"""
             query_result = db_query.execute_query(query.format(call.message.chat.id))
             bot.send_message(call.data, query_result.value[0][0]+' (@'+call.message.chat.username+') will come with you!')
+            query = """SELECT full_name_provided
+                                      	        FROM public."user"
+                                                  WHERE id={};"""
+            query_result = db_query.execute_query(query.format(call.data))
+            bot.send_message(call.message.chat.id, 'Done! Invitation from ' + query_result.value[0][0] + ' accepted.')
             # bot.send_message(call.data, call.message.chat.username'test')
             # for data in call.message.entities[1]:
             #     print((data))
