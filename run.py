@@ -29,7 +29,11 @@ def update_name(message):
             WHERE id={};"""
     query_result =  db_query.execute_query(query.format(message.text, message.chat.id), is_dml=True)
     if query_result.success:
-        bot.send_message(message.chat.id,"Got it! Now we are ready to work")
+        markup = telebot.types.ReplyKeyboardMarkup()
+        markup.row('Group A')
+        markup.row('Group B')
+        bot.send_message(message.chat.id, "Got it! Now you shall choose your group", reply_markup=markup)
+        # bot.send_message(message.chat.id,"Got it! Now you shall choose your group")
 def update_stage(message, stage):
     query = """UPDATE public."user"
                 SET stage={}
@@ -62,7 +66,8 @@ def insert_into_a_db(message):
     else:
         if not query_result.value[0][0]:
             bot.send_message(message.chat.id, "Tell us the key")
-        # else:
+        else:
+            bot.send_message(message.chat.id, "You are already logged in")
         #     markup = telebot.types.ReplyKeyboardMarkup()
         #     markup.row('Group A')
         #     markup.row('Group B')
@@ -88,15 +93,15 @@ def login(message):
             if query_result.success:
                 bot.send_message(message.chat.id, "<b>The password is correct!</b> \n"
                 "Please, answer one simple questions. \nWhat is your name?""", parse_mode='HTML')
-#
-# @bot.message_handler(func=lambda message: login_check(message))
-# def dialog(message):
-#     stage = stage_check(message)
-#     if stage==3:
-#
-#     # User name asked
-#     if stage==1:
-#         update_name(message)
+
+@bot.message_handler(func=lambda message: login_check(message))
+def dialog(message):
+    stage = stage_check(message)
+    # if stage==3:
+
+    # User name asked
+    if stage==1:
+        update_name(message)
 #     # Office name asked
 #     if stage==2:
 

@@ -33,15 +33,14 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="34" column="82" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#146#420#0" expanded="false" />
                 <element signature="e#154#241#0" expanded="false" />
                 <element signature="e#451#715#0" expanded="false" />
                 <element signature="e#459#537#0" expanded="false" />
-                <element signature="e#746#1062#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -344,7 +343,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -374,7 +375,6 @@
             <element signature="e#154#241#0" expanded="false" />
             <element signature="e#451#715#0" expanded="false" />
             <element signature="e#459#537#0" expanded="false" />
-            <element signature="e#746#1062#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -405,15 +405,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="396">
+          <caret line="34" column="82" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#146#420#0" expanded="false" />
             <element signature="e#154#241#0" expanded="false" />
             <element signature="e#451#715#0" expanded="false" />
             <element signature="e#459#537#0" expanded="false" />
-            <element signature="e#746#1062#0" expanded="false" />
           </folding>
         </state>
       </provider>
