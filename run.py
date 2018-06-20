@@ -29,7 +29,7 @@ def update_name(message):
             WHERE id={};"""
     query_result =  db_query.execute_query(query.format(message.text, message.chat.id), is_dml=True)
     if query_result.success:
-        markup = telebot.types.ReplyKeyboardMarkup()
+        markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row('Partner')
         markup.row('Consultant')
         bot.send_message(message.chat.id, "Got it! Now you shall choose your group", reply_markup=markup)
@@ -106,12 +106,23 @@ def handle_message(message):
 notify consultants about your intention""", reply_markup=markup)
     pass
 
+@bot.message_handler(regexp="min")
+def handle_message(message):
+    # update_stage(message, 4)
+    # markup = telebot.types.ReplyKeyboardMarkup()
+    # bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
+    bot.edit_message_text('I will go for a dinner in '+message+'utes. Would you like to join?')
+    pass
+
+
 @bot.message_handler(regexp="Consultant")
 def handle_message(message):
     update_stage(message, 4)
     markup = telebot.types.ReplyKeyboardMarkup()
     bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
     pass
+
+
 
 @bot.message_handler(func=lambda message: login_check(message))
 def dialog(message):
@@ -122,12 +133,14 @@ def dialog(message):
     if stage==1:
         update_name(message)
 #     # Office name asked
-#     if stage==2:
-
-
-
-
-
+#     if stage==3:
+#         query = """SELECT id
+#             	        FROM public."user"
+#                         WHERE stage=4;"""
+#         query_result = db_query.execute_query(query.format(message.chat.id))
+#         for id in query_result:
+#
+#             bot.send_message(id, """Now you can take an offer to dine with partners""", reply_markup=markup)
 
 
 @bot.message_handler(content_types='text')
