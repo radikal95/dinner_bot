@@ -123,8 +123,10 @@ def handle_message(message):
                 	        FROM public."user"
                             WHERE stage=4;"""
     query_result = db_query.execute_query(query.format(message.chat.id))
+    markup = telebot.types.InlineKeyboardMarkup()
+    markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data='yes'))
     for id in query_result.value[0]:
-        bot.send_message(id, msg)
+        bot.send_message(id, msg,reply_markup=markup)
     pass
 
 
@@ -135,6 +137,12 @@ def handle_message(message):
     bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
     pass
 
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    if call.message:
+        if call.data='yes':
+            print((call.message.entities.mention))
 
 
 @bot.message_handler(func=lambda message: login_check(message))
