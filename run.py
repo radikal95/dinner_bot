@@ -141,7 +141,7 @@ def handle_message(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
-        if call.data='yes':
+        if call.data=='yes':
             print((call.message.entities.mention))
 
 
