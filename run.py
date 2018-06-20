@@ -143,7 +143,7 @@ def handle_message(message):
 def callback_inline(call):
     if call.message:
         if call.data=='yes':
-            data = json.loads(call.message.entities)
+            data = (call.message.entities)
             print(data['type'])
             # for data in call.message.entities[1]:
             #     print((data))
