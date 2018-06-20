@@ -147,7 +147,10 @@ def callback_inline(call):
                           	        FROM public."user"
                                       WHERE id={};"""
             query_result = db_query.execute_query(query.format(call.message.chat.id))
-            bot.send_message(call.data, query_result.value[0][0]+' (@'+call.message.chat.username+') will come with you!')
+            if len(call.message.chat.username)>2:
+                bot.send_message(call.data, query_result.value[0][0]+' (@'+call.message.chat.username+') will come with you!')
+            else:
+                bot.send_message(call.data, query_result.value[0][0] + ' will come with you!')
             query = """SELECT full_name_provided
                                       	        FROM public."user"
                                                   WHERE id={};"""
