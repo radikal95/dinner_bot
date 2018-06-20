@@ -94,19 +94,6 @@ def login(message):
                 bot.send_message(message.chat.id, "<b>The password is correct!</b> \n"
                 "Please, answer one simple questions. \nWhat is your name?""", parse_mode='HTML')
 
-@bot.message_handler(func=lambda message: login_check(message))
-def dialog(message):
-    stage = stage_check(message)
-    # if stage==3:
-
-    # User name asked
-    if stage==1:
-        update_name(message)
-#     # Office name asked
-#     if stage==2:
-
-
-
 
 @bot.message_handler(regexp="Partner")
 def handle_message(message):
@@ -125,6 +112,21 @@ def handle_message(message):
     markup = telebot.types.ReplyKeyboardMarkup()
     bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
     pass
+
+@bot.message_handler(func=lambda message: login_check(message))
+def dialog(message):
+    stage = stage_check(message)
+    # if stage==3:
+
+    # User name asked
+    if stage==1:
+        update_name(message)
+#     # Office name asked
+#     if stage==2:
+
+
+
+
 
 
 
