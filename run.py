@@ -118,7 +118,7 @@ def handle_message(message):
                 	        FROM public."user"
                             WHERE stage=4;"""
     query_result = db_query.execute_query(query.format(message.chat.id))
-    for id in query_result[0][0]:
+    for id in query_result.value[0]:
         bot.send_message(id, msg)
     pass
 
