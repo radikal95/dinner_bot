@@ -131,6 +131,8 @@ def handle_message(message):
     for data in query_result.value:
         try:
             bot.send_message(data[0], msg,reply_markup=markup)
+        except:
+            continue
     pass
 
 
