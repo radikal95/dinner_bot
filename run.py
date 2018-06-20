@@ -125,7 +125,7 @@ def handle_message(message):
                             WHERE stage=4;"""
     query_result = db_query.execute_query(query.format(message.chat.id))
     markup = telebot.types.InlineKeyboardMarkup()
-    markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data='yes'))
+    markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data=message.chat.id))
     for id in query_result.value[0]:
         bot.send_message(id, msg,reply_markup=markup)
     pass
@@ -142,10 +142,13 @@ def handle_message(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
-        if call.data=='yes':
-            bot.send_message('@Radikal95', 'test')
-            data = (call.message.entities)
-            print(data['type'])
+        if call.data:
+            query = """SELECT full_name_provided
+                          	        FROM public."user"
+                                      WHERE id={};"""
+            query_result = db_query.execute_query(query.format(call.message.chat.id))
+            bot.send_message(call.data, query_result.value[0][0]+' (@'+call.message.chat.username+') will come with you!')
+            # bot.send_message(call.data, call.message.chat.username'test')
             # for data in call.message.entities[1]:
             #     print((data))
 
