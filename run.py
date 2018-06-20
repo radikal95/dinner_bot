@@ -33,7 +33,7 @@ def update_name(message):
         markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True)
         markup.row('Partner')
         markup.row('Consultant')
-        bot.send_message(message.chat.id, "Got it! Now you shall choose your group", reply_markup=markup)
+        bot.send_message(message.chat.id, "Got it! Now tell us who you are.", reply_markup=markup)
         # bot.send_message(message.chat.id,"Got it! Now you shall choose your group")
 def update_stage(message, stage):
     query = """UPDATE public."user"
@@ -93,7 +93,7 @@ def login(message):
             print(query_result)
             if query_result.success:
                 bot.send_message(message.chat.id, "<b>The password is correct!</b> \n"
-                "Please, answer one simple questions. \nWhat is your name?""", parse_mode='HTML')
+                "Please, answer one simple question. \nWhat is your full name?""", parse_mode='HTML')
 
 
 @bot.message_handler(regexp="Partner")
@@ -136,7 +136,7 @@ def handle_message(message):
 def handle_message(message):
     update_stage(message, 4)
     markup = telebot.types.ReplyKeyboardMarkup()
-    bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
+    bot.send_message(message.chat.id, """Now you will recieve invitations to have lunch with partners""", reply_markup=markup)
     pass
 
 
