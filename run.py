@@ -111,7 +111,7 @@ def handle_message(message):
     # update_stage(message, 4)
     # markup = telebot.types.ReplyKeyboardMarkup()
     # bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
-    bot.edit_message_text('I will go for a dinner in '+message.text+'utes. Would you like to join?')
+    bot.edit_message_text('I will go for a dinner in '+message.text+'utes. Would you like to join?',chat_id=message.chat.id)
     pass
 
 
