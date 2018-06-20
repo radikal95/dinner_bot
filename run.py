@@ -1,5 +1,6 @@
 import telebot
 import config
+import json
 from db_tool import DbQuery
 
 db_query = DbQuery()
@@ -142,8 +143,10 @@ def handle_message(message):
 def callback_inline(call):
     if call.message:
         if call.data=='yes':
-            for data in call.message.entities[0]:
-                print((data))
+            data = json.loads(call.message.entities)
+            print(data['type'])
+            # for data in call.message.entities[1]:
+            #     print((data))
 
 
 @bot.message_handler(func=lambda message: login_check(message))
