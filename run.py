@@ -189,8 +189,8 @@ def default_answer(message):
     bot.send_message(message.chat.id, "You are not authorized")
 
 while True:
-    bot.polling(none_stop=True)
-    # try:
-    #     bot.polling(none_stop=True)
-    # except:
-    #     continue
+    # bot.polling(none_stop=True)
+    try:
+        bot.polling(none_stop=True)
+    except:
+        continue
