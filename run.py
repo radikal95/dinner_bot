@@ -30,8 +30,8 @@ def update_name(message):
     query_result =  db_query.execute_query(query.format(message.text, message.chat.id), is_dml=True)
     if query_result.success:
         markup = telebot.types.ReplyKeyboardMarkup()
-        markup.row('Group A')
-        markup.row('Group B')
+        markup.row('Partner')
+        markup.row('Consultant')
         bot.send_message(message.chat.id, "Got it! Now you shall choose your group", reply_markup=markup)
         # bot.send_message(message.chat.id,"Got it! Now you shall choose your group")
 def update_stage(message, stage):
@@ -108,12 +108,22 @@ def dialog(message):
 
 
 
-@bot.message_handler(regexp="Group A")
+@bot.message_handler(regexp="Partner")
 def handle_message(message):
+    update_stage(message,3)
+    markup = telebot.types.ReplyKeyboardMarkup()
+    markup.row('5 min')
+    markup.row('10 min')
+    markup.row('15 min')
+    bot.send_message(message.chat.id, """Now you can invite consultants to have dinner with you! It is quite simple: you just press the button and we
+notify consultants about your intention""", reply_markup=markup)
     pass
 
-@bot.message_handler(regexp="Group B")
+@bot.message_handler(regexp="Consultant")
 def handle_message(message):
+    update_stage(message, 4)
+    markup = telebot.types.ReplyKeyboardMarkup()
+    bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
     pass
 
 
