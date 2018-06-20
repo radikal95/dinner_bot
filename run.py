@@ -120,7 +120,7 @@ def handle_message(message):
     msg = '@'+(message.chat.username)+' is going for a dinner in '+message.text+'utes'
     if len(query_result.value[0][0])>0:
         msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for a dinner in '+message.text+'utes'
-    query = """SELECT id
+    query = """SELECT *
                 	        FROM public."user"
                             WHERE stage=4;"""
     query_result = db_query.execute_query(query.format(message.chat.id))
