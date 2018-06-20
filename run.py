@@ -142,7 +142,7 @@ def handle_message(message):
 def callback_inline(call):
     if call.message:
         if call.data=='yes':
-            for data in call.message.entities:
+            for data in call.message.entities[3]:
                 print((data))
 
 
