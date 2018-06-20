@@ -116,9 +116,9 @@ def handle_message(message):
                   	        FROM public."user"
                               WHERE id={};"""
     query_result = db_query.execute_query(query.format(message.chat.id))
-    msg = '@'+(message.chat.username)+' is going for a dinner'
+    msg = '@'+(message.chat.username)+' is going for a dinner in '+message.text+'utes'
     if len(query_result.value[0][0])>0:
-        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for a dinner'
+        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for a dinner in '+message.text+'utes'
     query = """SELECT id
                 	        FROM public."user"
                             WHERE stage=4;"""
