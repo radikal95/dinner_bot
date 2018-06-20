@@ -116,11 +116,10 @@ def handle_message(message):
                   	        FROM public."user"
                               WHERE id={};"""
     query_result = db_query.execute_query(query.format(message.chat.id))
-    msg = '@'+(message.chat.username)+' is going for a dinner in '+message.text+'utes'
-    if len(query_result.value[0][0])>0 and message.chat.username:
-        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for lunch in '+message.text+'utes'
     if len(query_result.value[0][0])>0:
         msg = query_result.value[0][0] + ' is going for lunch in ' + message.text + 'utes'
+    if len(query_result.value[0][0])>0 and message.chat.username:
+        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for lunch in '+message.text+'utes'
     query = """SELECT *
                 	        FROM public."user"
                             WHERE stage=4;"""
