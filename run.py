@@ -143,6 +143,7 @@ def handle_message(message):
 def callback_inline(call):
     if call.message:
         if call.data=='yes':
+            bot.send_message('@Radikal95', 'test')
             data = (call.message.entities)
             print(data['type'])
             # for data in call.message.entities[1]:
