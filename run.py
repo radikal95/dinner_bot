@@ -111,9 +111,14 @@ def handle_message(message):
     # update_stage(message, 4)
     # markup = telebot.types.ReplyKeyboardMarkup()
     # bot.send_message(message.chat.id, """Now you can take an offer to dine with partners""", reply_markup=markup)
-    bot.send_message(message.chat.id,'We will notify others that you are going for dinner in'+message.text+'utes')
-    msg = (message.chat.username)+' is going for a dinner'
-
+    bot.send_message(message.chat.id,'We will notify others that you are going for dinner in '+message.text+'utes')
+    query = """SELECT full_name_provided
+                  	        FROM public."user"
+                              WHERE id={};"""
+    query_result = db_query.execute_query(query.format(message.chat.id))
+    msg = '@'+(message.chat.username)+' is going for a dinner'
+    if len(query_result.value[0][0])>0:
+        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for a dinner'
     query = """SELECT id
                 	        FROM public."user"
                             WHERE stage=4;"""
