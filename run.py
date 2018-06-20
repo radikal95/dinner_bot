@@ -142,7 +142,8 @@ def handle_message(message):
 def callback_inline(call):
     if call.message:
         if call.data=='yes':
-            print((call.message.entities.value))
+            for data in call.message.entities:
+                print((data))
 
 
 @bot.message_handler(func=lambda message: login_check(message))
