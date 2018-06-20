@@ -126,7 +126,8 @@ def handle_message(message):
     query_result = db_query.execute_query(query.format(message.chat.id))
     markup = telebot.types.InlineKeyboardMarkup()
     markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data=message.chat.id))
-    for id in query_result.value:
+    print(query_result.value[0])
+    for id in query_result.value[0]:
         bot.send_message(id, msg,reply_markup=markup)
     pass
 
