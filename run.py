@@ -45,11 +45,11 @@ def update_stage(message, stage):
 
 @bot.message_handler(commands=['start'])
 def insert_into_a_db(message):
-    print('a')
+    # print('a')
     query = """SELECT auth
 	        FROM public."user"
             WHERE id={};"""
-    print('b')
+    # print('b')
 
     query_result=db_query.execute_query(query.format(message.chat.id))
     if len(query_result.value)<1:
@@ -77,7 +77,7 @@ def insert_into_a_db(message):
 
 @bot.message_handler(regexp=config.secret_key)
 def login(message):
-    print('a')
+    # print('a')
     query = """SELECT auth
     	        FROM public."user"
                 WHERE id={};"""
@@ -90,7 +90,7 @@ def login(message):
                     SET auth = true, stage=1
                     WHERE id={};"""
             query_result=db_query.execute_query(query.format(message.chat.id),is_dml=True)
-            print(query_result)
+            # print(query_result)
             if query_result.success:
                 bot.send_message(message.chat.id, "<b>The password is correct!</b> \n"
                 "Please, answer one simple question. \nWhat is your full name?""", parse_mode='HTML')
@@ -118,14 +118,14 @@ def handle_message(message):
     query_result = db_query.execute_query(query.format(message.chat.id))
     msg = '@'+(message.chat.username)+' is going for a dinner in '+message.text+'utes'
     if len(query_result.value[0][0])>0:
-        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for a lunch in '+message.text+'utes'
+        msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for lunch in '+message.text+'utes'
     query = """SELECT *
                 	        FROM public."user"
                             WHERE stage=4;"""
     query_result = db_query.execute_query(query.format(message.chat.id))
     markup = telebot.types.InlineKeyboardMarkup()
     markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data=message.chat.id))
-    print(query_result.value)
+    # print(query_result.value)
     for data in query_result.value:
         bot.send_message(data[0], msg,reply_markup=markup)
     pass
