@@ -117,8 +117,10 @@ def handle_message(message):
                               WHERE id={};"""
     query_result = db_query.execute_query(query.format(message.chat.id))
     msg = '@'+(message.chat.username)+' is going for a dinner in '+message.text+'utes'
-    if len(query_result.value[0][0])>0:
+    if len(query_result.value[0][0])>0 and message.chat.username:
         msg=query_result.value[0][0]+' (@'+(message.chat.username)+') is going for lunch in '+message.text+'utes'
+    if len(query_result.value[0][0])>0:
+        msg = query_result.value[0][0] + ' is going for lunch in ' + message.text + 'utes'
     query = """SELECT *
                 	        FROM public."user"
                             WHERE stage=4;"""
@@ -127,7 +129,8 @@ def handle_message(message):
     markup.row(telebot.types.InlineKeyboardButton('I will come!',callback_data=message.chat.id))
     # print(query_result.value)
     for data in query_result.value:
-        bot.send_message(data[0], msg,reply_markup=markup)
+        try:
+            bot.send_message(data[0], msg,reply_markup=markup)
     pass
 
 
