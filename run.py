@@ -77,7 +77,7 @@ def insert_into_a_db(message):
         #     markup.row('Group A')
         #     markup.row('Group B')
         #     bot.send_message(message.chat.id, "Сhoose your group!", reply_markup=markup)
-
+    pass
 
 @bot.message_handler(regexp=config.secret_key)
 def login(message):
@@ -98,7 +98,7 @@ def login(message):
             if query_result.success:
                 bot.send_message(message.chat.id, "<b>The password is correct!</b> \n"
                 "Please, answer one simple question. \nWhat is your full name?""", parse_mode='HTML')
-
+    pass
 
 @bot.message_handler(regexp="Partner")
 def handle_message(message):
@@ -163,7 +163,9 @@ def callback_inline(call):
                                       	        FROM public."user"
                                                   WHERE id={};"""
             query_result = db_query.execute_query(query.format(call.data))
-            bot.send_message(call.message.chat.id, 'Done! Invitation from ' + query_result.value[0][0] + ' accepted.')
+            bot.answer_callback_query(call.id, text="Done!")
+            bot.send_message(call.message.chat.id, 'Invitation from ' + query_result.value[0][0] + ' accepted.')
+    pass
             # bot.send_message(call.data, call.message.chat.username'test')
             # for data in call.message.entities[1]:
             #     print((data))
@@ -186,11 +188,12 @@ def dialog(message):
 #         for id in query_result:
 #
 #             bot.send_message(id, """Now you can take an offer to dine with partners""", reply_markup=markup)
-
+    pass
 
 @bot.message_handler(content_types='text')
 def default_answer(message):
     bot.send_message(message.chat.id, "You are not authorized")
+    pass
 
 while True:
     # bot.polling(none_stop=True)
